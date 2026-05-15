@@ -1,4 +1,4 @@
-# ForMySketch 🎨
+# Friends of Sketch 🎨
 
 Herramienta online para procesar bocetos de tatuaje y generar versiones realistas + stencils para marcar.
 

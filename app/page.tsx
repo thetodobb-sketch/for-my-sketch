@@ -74,7 +74,7 @@ export default function Home() {
       <div className="bg-black/40 backdrop-blur-sm border-b border-white/10 sticky top-0 z-10">
         <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold">ForMySketch</h1>
+            <h1 className="text-3xl font-bold">Friends of Sketch</h1>
             <p className="text-sm text-slate-400">Tu boceto → Realista + Stencil</p>
           </div>
         </div>
@@ -190,7 +190,7 @@ export default function Home() {
 
       {/* Footer */}
       <div className="border-t border-white/10 mt-16 py-6 text-center text-slate-400 text-sm">
-        <p>ForMySketch • Herramienta para estudios de tatuaje</p>
+        <p>Friends of Sketch • Herramienta para estudios de tatuaje</p>
       </div>
     </main>
   );

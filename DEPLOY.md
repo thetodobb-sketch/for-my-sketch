@@ -1,9 +1,9 @@
-# 🚀 Guía de Deploy - ForMySketch
+# 🚀 Guía de Deploy - Friends of Sketch
 
 ## ¿Cómo está estructurada la app?
 
 ```
-📁 for-my-sketch/
+📁 friends-of-sketch/
 ├── app/
 │   ├── page.tsx          → Interfaz principal (UI)
 │   └── api/process/      → Endpoint para procesar (próximamente)
@@ -30,12 +30,12 @@
 npm install -g vercel
 
 # Desde carpeta del proyecto
-cd /Users/pablosilvame/Projects/for-my-sketch
+cd /Users/pablosilvame/Projects/friends-of-sketch
 vercel
 
 # Sigue las preguntas:
 # - ¿Quieres continuar? → yes
-# - ¿Qué proyecto es este? → ForMySketch
+# - ¿Qué proyecto es este? → Friends of Sketch
 # - ¿Personalizado? → no
 ```
 
@@ -44,14 +44,14 @@ vercel
 1. Ve a [vercel.com](https://vercel.com) e inicia sesión
 2. Haz clic en "New Project"
 3. Conecta tu GitHub (si ya subiste el repo) O:
-   - Descarga el ZIP de `/Users/pablosilvame/Projects/for-my-sketch`
+   - Descarga el ZIP de `/Users/pablosilvame/Projects/friends-of-sketch`
    - Sube manualmente en Vercel
 4. En "Environment Variables" agrega:
    - **Name**: `ANTHROPIC_API_KEY`
    - **Value**: Pega tu API key de Anthropic
 5. Click "Deploy"
 
-**Tu app estará en: `https://for-my-sketch.vercel.app`** (o similar)
+**Tu app estará en: `https://friends-of-sketch.vercel.app`** (o similar)
 
 ## ✅ Paso 3: Configura para iPad
 
