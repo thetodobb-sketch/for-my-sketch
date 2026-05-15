@@ -1,36 +1,96 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ForMySketch 🎨
 
-## Getting Started
+Herramienta online para procesar bocetos de tatuaje y generar versiones realistas + stencils para marcar.
 
-First, run the development server:
+## Características
 
-```bash
+- ✅ **Upload de bocetos** - Drag-drop de imágenes
+- ✅ **Versión realista** - Mejora el boceto a estilo fotográfico B&N
+- ✅ **Stencil automático** - Contornos limpios para transferir a piel
+- ✅ **Optimizado para iPad** - Interfaz touch-friendly
+- ✅ **Sin instalación** - Todo en la nube, acceso inmediato
+
+## Stack
+
+- **Frontend**: Next.js 15 + Tailwind CSS
+- **Hosting**: Vercel (deploy con 1 click)
+- **Backend**: Node.js API routes
+- **IA**: Claude API (análisis) + Canvas API (stencil)
+
+## Configuración Local
+
+### Requisitos
+- Node.js 18+
+- npm o yarn
+
+### Setup
+
+\`\`\`bash
+cd for-my-sketch
+npm install
+\`\`\`
+
+### Variables de entorno
+
+Crea \`.env.local\`:
+\`\`\`
+ANTHROPIC_API_KEY=tu_api_key_aqui
+\`\`\`
+
+Obtén tu API key en [console.anthropic.com](https://console.anthropic.com)
+
+### Desarrollo
+
+\`\`\`bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+\`\`\`
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abre [http://localhost:3000](http://localhost:3000)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Deploy a Vercel
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Opción 1: Vercel CLI (recomendado)
 
-## Learn More
+\`\`\`bash
+npm install -g vercel
+vercel
+\`\`\`
 
-To learn more about Next.js, take a look at the following resources:
+Sigue los pasos y autoriza en vercel.com. En el dashboard:
+1. Ve a Settings → Environment Variables
+2. Agrega \`ANTHROPIC_API_KEY\`
+3. Redeploy
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Opción 2: GitHub + Vercel
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Crea repo en GitHub
+2. Ve a [vercel.com/new](https://vercel.com/new)
+3. Importa el repo
+4. Agrega variables de entorno
+5. Deploy automático
 
-## Deploy on Vercel
+## Funcionalidades (MVP actual)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+✅ Upload de imágenes  
+✅ Procesamiento local (rápido, sin latencia)  
+✅ Generación de stencil en Canvas  
+✅ Descargas directas  
+✅ Interfaz iPad-optimizada  
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Próximas mejoras
+
+🔄 Integración con Replicate para imagen fotorrealista generada con IA  
+📱 Historial de trabajos guardados  
+🎯 Ajustes de contraste/brillo en tiempo real  
+👥 Múltiples usuarios por estudio  
+
+## Notas
+
+- Las imágenes se procesan en el cliente (navegador), no se envían a servidor
+- Solo se envía a Claude API cuando actives análisis avanzado (próxima feature)
+- Compatible con iOS Safari, Chrome, Edge
+- Recomendado: iPad Air o superior para mejor experiencia
+
+## Licencia
+
+Privado - Para uso interno en estudio de tatuaje
