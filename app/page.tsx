@@ -5,11 +5,26 @@ import { generateStencil, imageToBase64 } from '@/lib/imageProcessing';
 
 export default function Home() {
   const [originalImage, setOriginalImage] = useState<string | null>(null);
+  const [realisticImage, setRealisticImage] = useState<string | null>(null);
   const [stencilImage, setStencilImage] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [dragActive, setDragActive] = useState(false);
+
+  const generateRealistic = async (base64: string): Promise<string> => {
+    const res = await fetch('/api/process', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ image: base64 }),
+    });
+    if (!res.ok) {
+      const body = await res.json().catch(() => ({}));
+      throw new Error(body.detail || body.error || 'Error generando imagen realista');
+    }
+    const data = (await res.json()) as { image: string };
+    return data.image;
+  };
 
   const handleFile = async (file: File) => {
     if (!file.type.startsWith('image/')) {
@@ -19,16 +34,22 @@ export default function Home() {
 
     setError(null);
     setLoading(true);
+    setRealisticImage(null);
+    setStencilImage(null);
 
     try {
       const base64 = await imageToBase64(file);
       setOriginalImage(base64);
 
-      // Generar stencil
-      const stencil = await generateStencil(base64);
+      const [realistic, stencil] = await Promise.all([
+        generateRealistic(base64),
+        generateStencil(base64),
+      ]);
+      setRealisticImage(realistic);
       setStencilImage(stencil);
     } catch (err) {
-      setError('Error procesando la imagen. Intenta de nuevo.');
+      const msg = err instanceof Error ? err.message : 'Error procesando la imagen.';
+      setError(msg);
       console.error(err);
     } finally {
       setLoading(false);
@@ -61,6 +82,7 @@ export default function Home() {
 
   const handleReset = () => {
     setOriginalImage(null);
+    setRealisticImage(null);
     setStencilImage(null);
     setError(null);
     if (fileInputRef.current) {
@@ -134,21 +156,22 @@ export default function Home() {
             )}
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* Original/Realistic */}
+              {/* Realistic (generada por IA) */}
               <div className="space-y-4">
                 <h3 className="text-lg font-semibold">Versión Realista</h3>
                 <div className="bg-slate-800 rounded-xl overflow-hidden aspect-square">
-                  {originalImage && (
+                  {realisticImage && (
                     <img
-                      src={originalImage}
+                      src={realisticImage}
                       alt="Realistic"
                       className="w-full h-full object-contain"
                     />
                   )}
                 </div>
                 <button
-                  onClick={() => downloadImage(originalImage!, 'boceto-realista.png')}
-                  className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg transition-colors"
+                  onClick={() => downloadImage(realisticImage!, 'boceto-realista.png')}
+                  disabled={!realisticImage}
+                  className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-slate-700 disabled:cursor-not-allowed text-white font-semibold py-3 rounded-lg transition-colors"
                 >
                   Descargar Realista
                 </button>
